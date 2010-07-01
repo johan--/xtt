@@ -2,6 +2,7 @@ require 'fastercsv'
 class StatusesController < ApplicationController
   before_filter :find_status, :only => [:show, :edit, :update, :destroy]
   before_filter :login_required
+  protect_from_forgery :except => :create
 
   # USER SCOPE
   
