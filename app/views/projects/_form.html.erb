@@ -8,7 +8,7 @@
   <p>
 	  <label for="project_code">Default Code for posting to this project?</label>
 	  <span class="at">@</span>
-    <%= form.text_field :code, :maxlength => 50 %>
+    <%= form.text_field :code, :maxlength => 50, :size => 10 %>
     For example: '@proj' or '@project'
     <% unless form.object.new_record? %>
     <br />
