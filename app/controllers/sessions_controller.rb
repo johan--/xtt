@@ -69,7 +69,7 @@ protected
       end
     end
     current_user.activated_at ||= Time.now
-    current_user.state = "active" # came from openID, fuck it. don't send a welcome email.
+    current_user.aasm_state = "active" # came from openID, fuck it. don't send a welcome email.
     current_user.save!
   end
 
