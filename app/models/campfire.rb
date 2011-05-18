@@ -8,7 +8,7 @@ class Campfire < ActiveRecord::Base
   end
   
   def tinder_room
-    @tinder_room ||= self.name ? tinder.rooms.select { |r| r.name == room }[0] : tinder.rooms[0]
+    @tinder_room ||= self.room ? tinder.rooms.select { |r| r.name == room }[0] : tinder.rooms[0]
   end
 
 private
