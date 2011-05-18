@@ -9,7 +9,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20100630014806) do
+ActiveRecord::Schema.define(:version => 20100702185317) do
 
   create_table "bj_config", :primary_key => "bj_config_id", :force => true do |t|
     t.string "hostname"
@@ -61,8 +61,7 @@ ActiveRecord::Schema.define(:version => 20100630014806) do
 
   create_table "campfires", :force => true do |t|
     t.string   "domain"
-    t.string   "login"
-    t.string   "password"
+    t.string   "key"
     t.string   "room"
     t.integer  "user_id"
     t.datetime "created_at"

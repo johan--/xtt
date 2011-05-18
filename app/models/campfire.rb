@@ -8,15 +8,14 @@ class Campfire < ActiveRecord::Base
   end
   
   def tinder_room
-    @tinder_room ||= self.room ? tinder.rooms.select { |r| r.name == room }[0] : tinder.rooms[0]
+    @tinder_room ||= self.room ? tinder.find_room_by_name(room) : tinder.rooms[0]
   end
 
 private
 
   def tinder
     return @tinder if @tinder
-    @tinder = Tinder::Campfire.new domain, :ssl => true
-    @tinder.login login, password
+    @tinder = Tinder::Campfire.new domain, :token => key, :ssl => true
     @tinder
   end
 
