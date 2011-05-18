@@ -42,6 +42,10 @@ class UsersController < ApplicationController
 
   # user signup
   def create
+    unless SIGNUPS_ENABLED
+      render :text => "You can't sign up"
+      return
+    end
     cookies.delete :auth_token
     @user       = User.new(params[:user])
     @invitation = Invitation.find_by_code(params[:code]) unless params[:code].blank?
