@@ -97,7 +97,7 @@ protected
   def parse_time_from_message
     return if message.blank? 
     message.strip!
-    if message.gsub!(/\s*\[\-(\d+)\]$/, '')
+    if message.gsub!(/\s*\[\-(\d+)m?\]$/, '')
       offset = $1.to_s.to_i
       #message.gsub!(/\s\[\-#{offset}\]/, '')
       self.created_at = Time.now - offset.minutes

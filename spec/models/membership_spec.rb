@@ -5,7 +5,7 @@ describe Membership do
     model Membership do
       stub :user => all_stubs(:user), :project => all_stubs(:another_project), :code => 'foo'
     end
-    model Context
+    model UserContext
   end
   
   it "knows arbitrary users are not project members" do
@@ -57,7 +57,7 @@ describe Membership do
   it "sets the context from context_name" do
     mem = memberships(:default)
     mem.context_name = "foo"
-    mem.context.should be_an_instance_of(Context)
+    mem.context.should be_an_instance_of(UserContext)
     mem.context.name.should == "foo"
     mem.user.should == mem.context.user
   end

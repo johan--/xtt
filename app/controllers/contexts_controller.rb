@@ -24,7 +24,7 @@ class ContextsController < ApplicationController
     # reset @user var. hack. omg.
     user_status_for(params[:user_id])
 
-    @context ||= Context.new :name => "etc"
+    @context ||= UserContext.new :name => "etc"
     respond_to do |format|
       format.html # show.html.erb
       format.iphone

@@ -10,7 +10,7 @@ describe User do
 
   describe "being bootstrapped" do
     it "creates initial user as admin" do
-      create_user.should be_admin
+      make_user.should be_admin
     end
   end
   
@@ -186,7 +186,7 @@ describe User do
       @user = nil
       User.delete_all ['login=?', 'quire']
       @creating_user = lambda do
-        @user = create_user
+        @user = make_user
         violated "#{@user.errors.full_messages.to_sentence}" if @user.new_record?
       end
     end
@@ -322,7 +322,7 @@ describe User do
   
   describe "validation" do
     before do
-      @user = create_user :login => nil # eh, don't save it
+      @user = make_user :login => nil # eh, don't save it
       @user.login = 'quire'
       # fail @user.error_messages.to_sentence unless @user.valid?
     end
@@ -380,25 +380,25 @@ describe User do
     end
     
     it "requires a unique OpenID URL" do
-      user1 = create_user(:login => "hey", :email => "hey@whatisthat.com", :identity_url => "poop.com")
+      user1 = make_user(:login => "hey", :email => "hey@whatisthat.com", :identity_url => "poop.com")
       user1.save
       user1.identity_url.should == 'http://poop.com/'
       
-      user2 = create_user(:login => "poop", :email => "heharr@peep.com", :identity_url => "poop.com")
+      user2 = make_user(:login => "poop", :email => "heharr@peep.com", :identity_url => "poop.com")
       user2.should_not be_valid      
     end
     
     it "requires a unique e-mail" do
-      user1 = create_user(:login => "thing", :email => "hey@hey.com")
+      user1 = make_user(:login => "thing", :email => "hey@hey.com")
       user1.save
       
-      user2 = create_user(:login => "peep", :email => "hey@hey.com")
+      user2 = make_user(:login => "peep", :email => "hey@hey.com")
       user2.should_not be_valid      
     end
   end
 
 protected
-  def create_user(options = {})
+  def make_user(options = {})
     u = User.new({ :login => 'quire', :email => 'quire@example.com', :password => 'quire', :password_confirmation => 'quire' }.merge(options))
     u.register! if u.valid?
     u

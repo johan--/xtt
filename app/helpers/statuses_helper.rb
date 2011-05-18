@@ -75,9 +75,9 @@ module StatusesHelper
     end
   end
   
-  def chart_data_for(labels, filter, hours)
-    hours  = [hours] unless hours[0].is_a?(Array)
-    filter = filter.to_sym if filter
+  def chart_data_for(labels, filter, times)
+    times = [times] unless times[0].is_a?(Array)
+    filter     = filter.to_sym if filter
     hours_cache = {}
     hour_block = case filter
       when :weekly
@@ -90,9 +90,8 @@ module StatusesHelper
         # lambda { |memo, (user_id, date, hours)| memo.update(date.day => hours) }
         hours.each { |item| hours_cache.update(item[1].day => item[2]) }
     end
-    #hour_cache = hours.inject({}, &hour_block)
-    #labels.inject([]) { |memo, day| memo << hour_cache[day].to_f }
-    labels.inject([]) { |memo, day| memo << hours_cache[day].to_f }
+    hour_cache = times.inject({}, &hour_block)
+    labels.inject([]) { |memo, day| memo << hour_cache[day].to_f }
   end
 
   def paging_for_period(date_range)

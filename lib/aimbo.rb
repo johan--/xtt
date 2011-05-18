@@ -1,8 +1,8 @@
 require 'rubygems'
 require 'net/toc'
 
-require 'status'
-require 'user'
+# require 'status'
+# require 'user'
 
 module TOCMonkeypatch
   def names
@@ -83,7 +83,7 @@ class Aimbo
     :password => 'caboose',
     :admin    => 'courtenay187'
   }
-
+  
   cattr_accessor :credentials
   attr_accessor :client, :xtt
   include IM

@@ -6,7 +6,7 @@ class User < ActiveRecord::Base
   before_create { |u| u.admin = true if User.count.zero? }
 
   has_many :owned_projects, :order => 'projects.permalink', :class_name => 'Project'
-  has_many :contexts, :order => 'contexts.permalink'
+  has_many :contexts, :order => 'contexts.permalink', :class_name => "UserContext"
 
   has_many :campfires
   has_many :tendrils

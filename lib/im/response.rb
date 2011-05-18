@@ -1,5 +1,6 @@
 module IM
   class Response
+    include LiveTimer
     attr_accessor :user
     
     def initialize(message, buddy)
@@ -26,7 +27,9 @@ module IM
           if status = @user.statuses.latest
             code = (status.user.memberships.for(status.project) || status.project).code rescue "?"
             project = status.project ? "#{status.project.name} (@#{code})": "Out"
-            "Your current status is: <b>#{project}</b> #{status.message}"
+            timer = nice_time(status.accurate_time)
+            
+            "Your current status is: <b>#{project}</b> #{status.message} for #{timer}"
           else
             "No current status"
           end

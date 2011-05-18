@@ -101,7 +101,9 @@ module RspecOnRailsOnCrack
       end
       
       def do_stubbed_action(method, action, params = {})
-        controller.stub!(action)
+        meta = class << @controller ; self ; end
+        meta.stub!(action)
+        meta.send(:define_method, action) { head :ok }        
         send method, action, params
       end
       

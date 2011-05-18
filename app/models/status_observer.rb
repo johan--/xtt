@@ -31,7 +31,7 @@ class StatusObserver < ActiveRecord::Observer
         previous = status.previous
         tendril.notifies.send_message "[XTT] #{status.user.login} #{tense} out, and no longer working on #{status.previous.project.name}: '#{status.message}'"
       else
-        project = status.previous.project
+        project = status.previous && status.previous.project
         if project && project != status.project
           tendril.notifies.send_message "[XTT] #{status.user.login} switched projects, and #{tense} now \"#{status.message}\" on #{status.project.name}"
         elsif project.nil?

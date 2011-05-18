@@ -5,7 +5,7 @@ describe User, "sorting membership contexts" do
 
   before do
     @user     = users(:default)
-    @context  = contexts(:default)
+    @context  = user_contexts(:default)
     @contexts = @user.memberships.contexts
   end
 

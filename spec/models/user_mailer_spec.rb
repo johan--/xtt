@@ -12,6 +12,7 @@ describe User::Mailer do
     @expected.mime_version = '1.0'
     @expected.from         = TT_EMAIL.to_s
     @expected.to           = @user.email
+    @expected.date         = Time.now
   end
   
   it "sends activation email" do

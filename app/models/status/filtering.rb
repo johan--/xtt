@@ -50,8 +50,8 @@ protected
           yield
         end
       else
-        value = value.id if value.is_a? Context
-        with_scope :find => {:conditions => {'memberships.context_id' => value}, :select => "DISTINCT statuses.*",
+        value = value.id if value.is_a?(UserContext)
+        with_scope :find => {:conditions => {'memberships.user_context_id' => value}, :select => "DISTINCT statuses.*",
             :joins => "INNER JOIN memberships on statuses.project_id = memberships.project_id"} do
           yield
         end

@@ -37,11 +37,11 @@ describe IM::Response do
   
   it "responds with project name and code" do
     @project = mock_model(Project, :name => "Fools!", :code => "fools")
-    @status  = mock_model(Status, :project => @project, :message => "thanks!", :user => @user)
+    @status  = mock_model(Status, :project => @project, :message => "thanks!", :user => @user, :accurate_time => 1)
     @user.stub!(:statuses).and_return mock('proxy', :latest => @status)
     @user.stub!(:memberships).and_return([])
     @user.memberships.stub!(:for).and_return mock_model(Membership, :code => 'fools')
-    @aim.should_receive(:send_im).with("<HTML>Your current status is: <b>Fools! (@fools)</b> thanks!</HTML>")
+    @aim.should_receive(:send_im).with("<HTML>Your current status is: <b>Fools! (@fools)</b> thanks! for 0:00:01</HTML>")
     im = IM::Response.new "status", @aim
     
   end
