@@ -195,7 +195,7 @@
   <% end %>
   <% sbox.content = capture do %>
    <ul class="media-list">
-    <% @project.users.each_with_index do |user, index| -%>
+    <% @project.users.each_with_index do |user, index| -%><% next unless user.active? %>
       <li class="media-item clearfix<%= %( last) if first_in_collection?(@project.users, index) %>" id="<%= dom_id(user) %>">
         <div class="media">
           <%= link_to gravatar_for(user), user %>

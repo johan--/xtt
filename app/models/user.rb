@@ -38,7 +38,7 @@ class User < ActiveRecord::Base
   named_scope :all, :order => 'permalink'
   
   def related_users
-    @related_users ||= with_memberships { User.find :all, :order => 'last_status_at desc', :select => "DISTINCT users.*" }
+    @related_users ||= with_memberships { User.find :all, :order => 'last_status_at desc', :select => "DISTINCT users.*", :conditions => ['users.aasm_state = ?', 'active'] }
   end
   
   def related_to?(user)

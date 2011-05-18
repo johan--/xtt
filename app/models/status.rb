@@ -77,6 +77,7 @@ protected
   def set_project_from_code
     # Don't set the project if it's a new record and we have a project already. hm.
     unless new_record? && project?
+      self.code_and_message = code_and_message
       if @code.blank? # Don't set a project
         self.project = nil
         return
@@ -131,7 +132,7 @@ protected
 
   def process_previous
     user.statuses.find(:all, :conditions => ['aasm_state = ? AND finished_at IS NULL AND id != ?', 'pending', id]).each &:process!
-    # previous.process! if previous
+    previous.process! if previous && !previous.processed?
   end
 
   def cache_user_status
