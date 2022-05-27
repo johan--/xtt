@@ -2,7 +2,7 @@ source :gemcutter
 
 gem 'mysql'
 
-gem 'rack', '1.1.2'
+gem 'rack', '1.1.6'
 gem 'mongrel'
 gem 'rails', '2.3.11'
 gem 'ruby-openid', '2.0.4', :require => 'openid'
