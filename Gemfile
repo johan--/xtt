@@ -5,7 +5,7 @@ gem 'mysql'
 gem 'rack', '1.1.2'
 gem 'mongrel'
 gem 'rails', '2.3.11'
-gem 'ruby-openid', '2.0.4', :require => 'openid'
+gem 'ruby-openid', '2.9.2', :require => 'openid'
 
 group :test do
   gem 'ruby-debug'
